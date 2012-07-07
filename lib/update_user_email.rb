@@ -10,6 +10,13 @@ class UpdateUserEmail
     
     @user_repository.save_user_with_temporary_email(user, new_email)
     
-    @notifier.send_notification_changed_message_to(user, "token", new_email)
+    @notifier.send_notification_changed_message_to(user, Token.new.generate, new_email)
+  end
+end
+
+require 'digest/md5'
+class Token
+  def generate
+    Digest::MD5.hexdigest(Time.now.to_s)
   end
 end
