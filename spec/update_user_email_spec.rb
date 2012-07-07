@@ -32,10 +32,10 @@ describe UpdateUserEmail do
     end
 
     it "notify a message with the token" do
-      mock(@notifier).send_notification_changed_message_to(user, "token", 'new@email.it')
+      mock(@notifier).send_notification_changed_message_to(user, anything, 'new@email.it')
       
       update_user_email = UpdateUserEmail.new(@repository, @notifier)
-      update_user_email.persist_email_and_notifies_token(15, 'new@email.it')
+      update_user_email.persist_email_and_notifies_token(15, 'new@email.it')      
     end
     
   end
